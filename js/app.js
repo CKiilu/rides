@@ -13,3 +13,9 @@ $(window).scroll(function () {
         $("nav a").removeClass("scrolling");
     }
 });
+$(document).ready(function(){
+    var img_url = 'https://udemy-images.udemy.com/course/750x422/391546_3a97_3.jpg'
+  $('.slides').css({
+    'background-image': 'url("'+img_url+'")',
+  });
+});
