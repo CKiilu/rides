@@ -10,6 +10,7 @@ header {
     text-align: center;
     padding: 10px;
     position: fixed;
+    z-index: 3000;
 }
 nav a {
     color: #fff;
@@ -39,6 +40,7 @@ main{
 .slides img{
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 footer {
