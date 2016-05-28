@@ -4,7 +4,7 @@ body {
 }
 
 header {
-    background: #000;
+    background: rgba(0,0,0,.6);
     height: 10vh;
     width: 100vw;
     text-align: center;
@@ -35,6 +35,10 @@ main{
     height: 90vh;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.slides img{
+    width: 100%;
+    height: 100%;
 }
 
 footer {
