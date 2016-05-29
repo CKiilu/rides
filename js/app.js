@@ -1,7 +1,7 @@
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
 
-    if (scroll >= 100) {
+    if (scroll >= $(window).height()) {
         $("header").css({
             'background': 'rgba(255,255,255,.2)',
         });
@@ -14,7 +14,6 @@ $(window).scroll(function() {
         $("nav a").removeClass("scrolling");
     }
 });
-// var index = 1;
 
 $(document).ready(function() {
     var img_url = [
@@ -32,32 +31,22 @@ $(document).ready(function() {
 
     function loop(index = 1) {
         $('.controls').off('click').on('click', function(event) {
-            console.log(1)
             if ($(this).attr('id') == 'prev') {
-                console.log(2)
                 var current = $('.slides img').attr('data-num');
                 if(current == 0){
-                    console.log(3)
                     index = img_url.length - 1;
                 } else {
-                    console.log(4)
                     index =  +current - 1;
                 }
-                // console.log("prev", current, index)
             }
             else if ($(this).attr('id') == 'next') {
-                console.log(5)
                 var current = $('.slides img').attr('data-num');
                 if (current == img_url.length - 1){
-                    console.log(6)
                     index = 0;
                 } else {
-                    console.log(7)
                     index = +current + 1;
                 }
-                // console.log("next", current, index)
             }
-            console.log(8)
             $('.slides img').attr({
                 'src': img_url[index],
                 'data-num': index,
