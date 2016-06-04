@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!doctype html>
 
 <head>
@@ -16,33 +17,7 @@
 
 <body>
     <div id="map"></div>
-    <script>
-        function initMap() {
-            var latlng = {
-                    lat: -1.2921,
-                    lng: 36.8219
-                }
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 14,
-                center: latlng,
-            }); 
-            var marker = new google.maps.Marker({
-              position: latlng,
-              map: map,
-              title: 'Click to zoom'
-            });
-    
-            map.addListener('click', function(position) {
-              map.setZoom(14);
-              var latlng = {
-                  lat: position.latLng.lat(),
-                  lng: position.latLng.lng(),
-              }
-              map.setCenter(latlng);
-              marker.setPosition(latlng);
-            });
-        }
-    </script>
+    <script src="{% static 'js/googlemaps.js' %}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQkwi9eFIhcRNwExnvBN0WbmEFH4y-CHU&callback=initMap">
     </script>
 </body>
