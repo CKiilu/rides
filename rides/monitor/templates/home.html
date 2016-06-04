@@ -12,11 +12,17 @@
         height: 60%;
     }
 </style>
-
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    
     <div id="map"></div>
+    <button class="time">Estimate Time</button>
+    <button class="price">Estimate Price</button>
+    <button class="products">Available Products</button>
+    <div id="response"></div>
+    {{ s}}
     <script src="{% static 'js/googlemaps.js' %}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQkwi9eFIhcRNwExnvBN0WbmEFH4y-CHU&callback=initMap">
     </script>
