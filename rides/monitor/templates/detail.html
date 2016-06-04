@@ -17,12 +17,7 @@
 
 <body>
     
-    <div id="map"></div>
-    <button class="time">Estimate Time</button>
-    <button class="price">Estimate Price</button>
-    <button class="products">Available Products</button>
-    <a href="{{ login }}">Authorize application</a>
-    <div id="response"></div>
+    <div>{{ profile }}</div>
     <script src="{% static 'js/googlemaps.js' %}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQkwi9eFIhcRNwExnvBN0WbmEFH4y-CHU&callback=initMap">
     </script>
