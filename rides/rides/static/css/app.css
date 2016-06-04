@@ -1,0 +1,16 @@
+ html,
+ body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+ }
+ 
+ #map {
+     height: 60%;
+ }
+ #prof{
+     background:rgba(45,45,45,.5);
+     margin:0 auto;
+     padding:40px;
+     text-align:center;
+ }

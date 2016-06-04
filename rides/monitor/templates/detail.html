@@ -1,24 +1,9 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-<!doctype html>
-
-<head>
-<style>
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    #map {
-        height: 60%;
-    }
-</style>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    
-    <div>{{ profile }}</div>
-    <script src="{% static 'js/googlemaps.js' %}"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQkwi9eFIhcRNwExnvBN0WbmEFH4y-CHU&callback=initMap">
-    </script>
-</body>
+{% block content %} 
+    <div id="prof">
+       <img src="{{ profile.picture }}">
+       <p>Name: {{ profile.first_name }} {{ profile.last_name }}</p>
+       <p>Email: {{ profile.email }} </p>
+    </div>
+{% endblock %}

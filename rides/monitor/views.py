@@ -72,6 +72,7 @@ def profile(request):
             }
         )
         data = response.json()
+    
     context = {
         'profile': data
     }
