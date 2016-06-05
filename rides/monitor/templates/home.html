@@ -5,9 +5,11 @@
     <button class="time">Estimate Time</button>
     <button class="price">Estimate Price</button>
     <button class="products">Available Products</button>
-    <a href="{{ login }}">View my Profile</a>
+    <a href="{{ profile }}">View my Profile</a>
+    <a href="{{ history }}">History</a>
     <div id="response"></div>
+{% endblock %}
+{% block js %}
     <script src="{% static 'js/googlemaps.js' %}"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQkwi9eFIhcRNwExnvBN0WbmEFH4y-CHU&callback=initMap">
-    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQkwi9eFIhcRNwExnvBN0WbmEFH4y-CHU&callback=initMap"></script>
 {% endblock %}
