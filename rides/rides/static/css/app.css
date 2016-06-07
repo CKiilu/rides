@@ -4,9 +4,9 @@
      margin: 0;
      padding: 0;
  }
- 
  #map {
-     height: 60vh;
+     height: 400px;
+  margin: 0 auto 20px auto;
  }
  #prof{
      background:rgba(45,45,45,.5);

@@ -63,7 +63,40 @@ function getUserLocation(end) {
                     type: req_type
                 },
                 success: function(data) {
-                    $('#response').text(data);
+                    data = JSON.parse(data);
+                    if (data.products) {
+                        data = data.products;
+                        $('#response').empty();
+                        for (val in data) {
+                            $('#response').append('<h3>Product '+(+val+1)+'</h3>');
+                            $('#response').append('<p>Capacity: ' + data[val].capacity + '</p>');
+                            $('#response').append('<p>Description: ' + data[val].description + '</p>');
+                            $('#response').append('<p>Product Name: ' + data[val].display_name + '</p>');
+                            $('#response').append('<h4>Price details</h4>');
+                            $('#response').append('<p>Price Details: Cost per distance - ' + data[val].price_details.cost_per_distance + 'km  Cost per Minute - ' + data[val].price_details.cost_per_minute + '</p>');
+                        }
+                    }
+                    else if (data.times) {
+                        data = data.times;
+                        $('#response').empty();
+                        for (val in data) {
+                            $('#response').append('<h3>Time '+(+val+1)+'</h3>');
+                            $('#response').append('<p>Localized Product Name: ' + data[val].localized_display_name + '</p>');
+                            $('#response').append('<p>Estimate: ' + data[val].estimate + '</p>');
+                            $('#response').append('<p>Product Name: ' + data[val].display_name + '</p>');
+                            $('#response').append('<p>Product ID: ' + data[val].product_id + '</p>');
+                        }
+                    }
+                    else if (data.prices) {
+                        data = data.prices;
+                        $('#response').empty();
+                        for (val in data) {
+                            $('#response').append('<h3>Price '+(+val+1)+'</h3>');
+                            $('#response').append('<p>Distance: ' + data[val].distance + ' km</p>');
+                            $('#response').append('<p>Estimate: ' + data[val].estimate + '</p>');
+                            $('#response').append('<p>Duration: ' + data[val].duration + ' minutes</p>');
+                        }
+                    }
                 },
             })
         });

@@ -3,6 +3,7 @@ import requests
 import simplejson
 
 from django.core.cache import cache
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -19,8 +20,10 @@ PERMISSION_SCOPES = [
     'ride_widgets',
     'history',
     'places',
+    'request',
     ]
 HISTORY_REDIRECT_URL = 'https://rides-ckiilu.c9users.io/history'
+PAY_REDIRECT_URL = 'https://rides-ckiilu.c9users.io/pay_method'
 PROFILE_REDIRECT_URL = 'https://rides-ckiilu.c9users.io/profile'
 SERVER_TOKEN = '41ti1oAYb5wcLWKTUjgxG-B4grRYeYQlrVzoTCkf'
 test_url ="https://sandbox-api.uber.com/v1/"
@@ -39,8 +42,12 @@ uber_api = OAuth2Service(
 
 
 def home(request):
-    prof_url = None
-    parameters = {
+    pay_parameters = {
+        'response_type': 'code',
+        'redirect_uri': PAY_REDIRECT_URL,
+        'scopes': PERMISSION_SCOPES,
+    }
+    prof_parameters = {
         'response_type': 'code',
         'redirect_uri': PROFILE_REDIRECT_URL,
         'scopes': PERMISSION_SCOPES,
@@ -50,12 +57,14 @@ def home(request):
         'redirect_uri': HISTORY_REDIRECT_URL,
         'scopes': PERMISSION_SCOPES,
     }
-    prof_url = uber_api.get_authorize_url(**parameters)
+    pay_url = uber_api.get_authorize_url(**pay_parameters)
+    prof_url = uber_api.get_authorize_url(**prof_parameters)
     hist_url = uber_api.get_authorize_url(**hist_parameters)
     
     context = {
         'profile': prof_url,
-        'history': hist_url
+        'history': hist_url,
+        'pay': pay_url,
     }
     return render(request, 'home.html', context)
     
@@ -63,11 +72,20 @@ def profile(request):
     data = None
     if request.GET.get('code'):
         data = uber_auth(request, test_url + 'me', PROFILE_REDIRECT_URL)
-    
     context = {
-        'profile': data
+        'profile': data,
     }
     return render(request, 'detail.html', context)
+    
+    
+def pay_method(request):
+    data = None
+    if request.GET.get('code'):
+        data = uber_auth(request, test_url + 'payment-methods', PAY_REDIRECT_URL)
+    context = {
+        'pay': data,
+    }
+    return render(request, 'history.html', context)
     
 def history(request):
     data = None
@@ -114,8 +132,9 @@ def coords(request):
                 'start_latitude': request.GET.get('start[lat]'),
                 'end_latitude': request.GET.get('end[lat]'),
                 'start_longitude': request.GET.get('start[lng]'),
-                'end_longitude': request.GET.get('end[lat]'),
+                'end_longitude': request.GET.get('end[lng]'),
             }
+            
             
             url = 'estimates/time' if req_type == 'time' else 'estimates/price'
         elif req_type == 'products':
